@@ -1,4 +1,4 @@
-(*type 'a dll = 
+type 'a dll = 
     | Empty 
     | Node of {mutable pred: 'a dll; mutable succ: 'a dll; item: 'a}
 
@@ -19,6 +19,11 @@ let add (elem: 'a) (lst: 'a dll) =
                 m.pred <- new_head;
                 n.succ <- new_head;
                 lst 
-*)
-type 'a cell = {mutable pred: 'a dlist; mutable succ: 'a dlist; item: 'a}
-and 'a dlist = Empty | Cell of 'a cell
+
+(** elem is sure to be an element of lst *)
+let rec remove elem lst =  
+    match lst with 
+    | Empty -> failwith "Empty list"
+    | Node n -> 
+        if n.item = elem && n.pred = Empty then Empty
+        else if n.item = elem then n.succ. <- n.succ
